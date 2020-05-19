@@ -78,10 +78,10 @@ struct PPOReplayMemory {
         }
         
         let o = Tensor<Float>(concatenating: trajs.map { $0.o }, alongAxis: 0).reshaped(to: obsBatchShape)
-	    let a = Tensor<Float>(concatenating: trajs.map { $0.a }, alongAxis: 0).reshaped(to: batchShape)
-	    let oldLogP = Tensor<Float>(concatenating: trajs.map { $0.oldLogP }, alongAxis: 0).reshaped(to: batchShape)
-	    let r = Tensor<Float>(concatenating: trajs.map { $0.r }, alongAxis: 0).reshaped(to: batchShape)
-	    let adv = Tensor<Float>(concatenating: trajs.map { $0.v }, alongAxis: 0).reshaped(to: batchShape)
+        let a = Tensor<Float>(concatenating: trajs.map { $0.a }, alongAxis: 0).reshaped(to: batchShape)
+        let oldLogP = Tensor<Float>(concatenating: trajs.map { $0.oldLogP }, alongAxis: 0).reshaped(to: batchShape)
+        let r = Tensor<Float>(concatenating: trajs.map { $0.r }, alongAxis: 0).reshaped(to: batchShape)
+        let adv = Tensor<Float>(concatenating: trajs.map { $0.v }, alongAxis: 0).reshaped(to: batchShape)
         let normAdv = (adv - adv.mean(alongAxes: 0)) / adv.variance(alongAxes: 0)
         return (o, a, oldLogP, r, normAdv)
     }
